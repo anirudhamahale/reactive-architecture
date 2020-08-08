@@ -17,13 +17,14 @@ class HomeViewModel: ViewModelType {
   }
   
   struct Input {
-    let fetchMovies: Observable<Void>
-    let retry: Observable<Void>
+    let fetchMovies: Driver<Void>
+    let retry: Driver<Void>
   }
   
   struct Output {
-    let syncSuccess: Observable<String>
-    let loading: Observable<Bool>
+    let syncSuccess: Driver<String>
+    let loading: Driver<Bool>
+    let error: Driver<Error>
   }
   
   var repository: SyncRepository
@@ -33,21 +34,18 @@ class HomeViewModel: ViewModelType {
   }
   
   func transform(input: Input) -> Output {
-    let loadingSubject = PublishSubject<Bool>()
+    let activityIndicator = ActivityIndicator()
+    let errorTracker = ErrorTracker()
     
-    let fetching = Observable.merge(input.fetchMovies, input.retry)
-      .flatMapLatest { [unowned self] _ -> Observable<String> in
-        loadingSubject.onNext(true)
-        return self.repository.sync()
-          .map { (value) -> String in
-            loadingSubject.onNext(false)
-            return value
-        }.catchError { (error) -> Observable<String> in
-          loadingSubject.onNext(false)
-          return Observable.just(error.localizedDescription)
-          // return Observable.of(error.localizedDescription)
-        }.map({ $0 })
+    let syncSuccess = Driver.merge(input.fetchMovies, input.retry)
+    .flatMapLatest { [unowned self] in
+      return self.repository.failure()
+        .trackActivity(activityIndicator)
+        .trackError(errorTracker)
+        .asDriverOnErrorJustComplete()
+        .map { $0 }
     }
-    return Output(syncSuccess: fetching, loading: loadingSubject.asObservable())
+
+    return Output(syncSuccess: syncSuccess, loading: activityIndicator.asDriver(), error: errorTracker.asDriver())
   }
 }

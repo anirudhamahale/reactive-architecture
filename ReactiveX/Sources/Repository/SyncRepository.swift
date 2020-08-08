@@ -10,14 +10,22 @@ import Foundation
 import RxSwift
 
 class SyncRepository {
-  func sync() -> Observable<String> {
-    return Observable.of("Successfully Synced data.")
-    .delay(.seconds(3), scheduler: MainScheduler.instance)
+  func success() -> Observable<String> {
+    return Observable<String>.create { (observer) -> Disposable in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        observer.onNext("Your element of surprise.")
+      })
+      return Disposables.create()
+    }
   }
   
-  func error() -> Observable<String> {
-    let userInfo = [NSLocalizedDescriptionKey : "You need to obtain the user key."]
-    return Observable.error(NSError(domain: "", code: 400, userInfo: userInfo))
-    .delay(.seconds(3), scheduler: MainScheduler.instance)
+  func failure() -> Observable<String> {
+    return Observable<String>.create { (observer) -> Disposable in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        let userInfo = [NSLocalizedDescriptionKey : "You are not authorized."]
+        observer.onError(NSError(domain: "", code: 401, userInfo: userInfo))
+      })
+      return Disposables.create()
+    }
   }
 }

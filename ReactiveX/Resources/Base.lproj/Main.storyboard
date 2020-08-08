@@ -51,23 +51,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IlG-wB-uFE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Jtp-Pb-jPJ">
+                                <rect key="frame" x="197" y="108" width="20" height="20"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="IlG-wB-uFE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3Ef-TY-3MW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IlG-wB-uFE" secondAttribute="trailing" id="6Aq-s1-lsK"/>
-                            <constraint firstItem="IlG-wB-uFE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F4x-bI-fSh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IlG-wB-uFE" secondAttribute="bottom" id="ci9-XM-Ee8"/>
+                            <constraint firstItem="Jtp-Pb-jPJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="lZ3-k9-enh"/>
+                            <constraint firstItem="Jtp-Pb-jPJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zdp-Xm-nDZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="X0i-EH-GTI"/>
                     <connections>
-                        <outlet property="loadingView" destination="IlG-wB-uFE" id="nyd-rZ-gwq"/>
+                        <outlet property="activityIndicator" destination="Jtp-Pb-jPJ" id="nmf-b5-HYL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

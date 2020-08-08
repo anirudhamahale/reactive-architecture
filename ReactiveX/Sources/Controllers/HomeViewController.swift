@@ -17,9 +17,10 @@ class HomeViewController: UIViewController {
   }
   
   private let disposeBag = DisposeBag()
+  let retry = PublishSubject<Void>()
   
   var viewModel: HomeViewModel!
-  @IBOutlet weak var loadingView: UIView!
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,63 +30,64 @@ class HomeViewController: UIViewController {
     
     let viewDidAppear = rx.sentMessage(#selector(UIViewController.viewDidAppear(_:)))
       .mapToVoid()
-    // .asDriverOnErrorJustComplete()
+      .asDriverOnErrorJustComplete()
     
-    let retry = PublishSubject<Void>()
-    
-    let input = HomeViewModel.Input(fetchMovies: viewDidAppear, retry: retry.asObservable())
+    let input = HomeViewModel.Input(fetchMovies: viewDidAppear, retry: retry.asDriverOnErrorJustComplete())
     let output = viewModel.transform(input: input)
     
-    output.syncSuccess
-      .do(onNext: { (value) in
-        print("onNext: \(value)")
-      }, afterNext: { (value) in
-        print("afterNext: \(value)")
-      }, onError: { (error) in
-        print("onError: \(error)")
-      }, afterError: { (error) in
-        print("afterError: \(error)")
-      }, onCompleted: {
-        print("onCompleted")
-      }, afterCompleted: {
-        print("afterCompleted")
-      }, onSubscribe: {
-        print("onSubscribe")
-      }, onSubscribed: {
-        print("onSubscribed")
-      }, onDispose: {
-        print("onDispose")
-      })
-      .flatMapFirst { [unowned self] (message) -> Observable<Void> in
-        let (alert, trigger) = self.createAlert(message: message)
-        self.present(alert, animated: true)
-        return trigger
-    }.subscribe(retry)
+    output.loading
+      .skip(1)
+      .map({ $0 ? "Loading..." : "Loaded!" })
+      .drive(rx.title)
       .disposed(by: disposeBag)
     
     output.loading
-      .map({ !$0 })
-      .bind(to: loadingView.rx.isHidden)
+      .drive(activityIndicator.rx.isAnimating)
+      .disposed(by: disposeBag)
+    
+    output.syncSuccess
+      .drive(alert)
+      .disposed(by: disposeBag)
+    
+    output.error
+      .drive(error)
       .disposed(by: disposeBag)
   }
   
-  func createAlert(message: String) -> (UIViewController, Observable<Void>) {
-    let trigger = PublishSubject<Void>()
-    let alert = UIAlertController(title: "Sync failed!",
-                                  message: message,
-                                  preferredStyle: .alert)
-    let okay = UIAlertAction(title: "Retry", style: .default, handler: { _ in
-      trigger.onNext(())
-      trigger.onCompleted()
-    })
-    let dismiss = UIAlertAction(title: "Dismiss",
-                                style: UIAlertAction.Style.cancel,
-                                handler: nil)
-    
-    alert.addAction(okay)
-    alert.addAction(dismiss)
-    return (alert, trigger)
+  var alert: Binder<String> {
+    return Binder(self) { (vc, message) in
+      let alert = UIAlertController(title: "Sync failed!",
+                                    message: message,
+                                    preferredStyle: .alert)
+      let okay = UIAlertAction(title: "Retry", style: .default, handler: { _ in
+        vc.retry.onNext(())
+      })
+      let dismiss = UIAlertAction(title: "Dismiss",
+                                  style: UIAlertAction.Style.cancel,
+                                  handler: nil)
+      
+      alert.addAction(okay)
+      alert.addAction(dismiss)
+      vc.present(alert, animated: true, completion: nil)
+    }
   }
   
+  var error: Binder<Error> {
+    return Binder(self) { (vc, error) in
+      let alert = UIAlertController(title: "Sync failed!",
+                                    message: error.localizedDescription,
+                                    preferredStyle: .alert)
+      let okay = UIAlertAction(title: "Retry", style: .default, handler: { _ in
+        vc.retry.onNext(())
+      })
+      let dismiss = UIAlertAction(title: "Dismiss",
+                                  style: UIAlertAction.Style.cancel,
+                                  handler: nil)
+      
+      alert.addAction(okay)
+      alert.addAction(dismiss)
+      vc.present(alert, animated: true, completion: nil)
+    }
+  }
 }
 
