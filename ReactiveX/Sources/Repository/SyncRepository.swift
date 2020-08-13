@@ -28,4 +28,13 @@ class SyncRepository {
       return Disposables.create()
     }
   }
+  
+  func names() -> Observable<[String]> {
+     return .create { (observer) -> Disposable in
+       DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+        observer.onNext(["Jay", "Ho"])
+       })
+       return Disposables.create()
+     }
+   }
 }
