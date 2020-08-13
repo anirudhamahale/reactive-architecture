@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		862E68C8082CB8F5C7F5942D /* Pods_ReactiveX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98A546A3F51D5CB079B9DC2C /* Pods_ReactiveX.framework */; };
+		8F3525A924E5418D00958EF1 /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3525A824E5418D00958EF1 /* MoviesViewController.swift */; };
+		8F3525AB24E5419F00958EF1 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3525AA24E5419F00958EF1 /* MoviesViewModel.swift */; };
+		8F3525AD24E544AD00958EF1 /* RxAnimatableTableSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3525AC24E544AC00958EF1 /* RxAnimatableTableSectionModel.swift */; };
 		8F50205724D73F6300CCAD60 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50205624D73F6300CCAD60 /* ViewModelType.swift */; };
 		8F50205B24D73FE300CCAD60 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50205A24D73FE300CCAD60 /* HomeViewModel.swift */; };
 		8F50205D24D7441D00CCAD60 /* Observable+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F50205C24D7441D00CCAD60 /* Observable+Ext.swift */; };
@@ -24,6 +27,9 @@
 /* Begin PBXFileReference section */
 		2C28F5AE03DC0ADC495CA546 /* Pods-ReactiveX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveX.debug.xcconfig"; path = "Target Support Files/Pods-ReactiveX/Pods-ReactiveX.debug.xcconfig"; sourceTree = "<group>"; };
 		31A8ED28559D53C681F0CC59 /* Pods-ReactiveX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReactiveX.release.xcconfig"; path = "Target Support Files/Pods-ReactiveX/Pods-ReactiveX.release.xcconfig"; sourceTree = "<group>"; };
+		8F3525A824E5418D00958EF1 /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
+		8F3525AA24E5419F00958EF1 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
+		8F3525AC24E544AC00958EF1 /* RxAnimatableTableSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxAnimatableTableSectionModel.swift; sourceTree = "<group>"; };
 		8F50205624D73F6300CCAD60 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		8F50205A24D73FE300CCAD60 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8F50205C24D7441D00CCAD60 /* Observable+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Ext.swift"; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				8FCEE4CC24D73C6900DD759E /* HomeViewController.swift */,
+				8F3525A824E5418D00958EF1 /* MoviesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -106,6 +113,7 @@
 				8F50205C24D7441D00CCAD60 /* Observable+Ext.swift */,
 				8FAE670F24DE94EA000EB72B /* ErrorTracker.swift */,
 				8FAE671124DE957E000EB72B /* ActivityIndicator.swift */,
+				8F3525AC24E544AC00958EF1 /* RxAnimatableTableSectionModel.swift */,
 			);
 			path = Rx;
 			sourceTree = "<group>";
@@ -114,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				8F50205A24D73FE300CCAD60 /* HomeViewModel.swift */,
+				8F3525AA24E5419F00958EF1 /* MoviesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -285,6 +294,9 @@
 				8F50205724D73F6300CCAD60 /* ViewModelType.swift in Sources */,
 				8F50205B24D73FE300CCAD60 /* HomeViewModel.swift in Sources */,
 				8F50205D24D7441D00CCAD60 /* Observable+Ext.swift in Sources */,
+				8F3525A924E5418D00958EF1 /* MoviesViewController.swift in Sources */,
+				8F3525AD24E544AD00958EF1 /* RxAnimatableTableSectionModel.swift in Sources */,
+				8F3525AB24E5419F00958EF1 /* MoviesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

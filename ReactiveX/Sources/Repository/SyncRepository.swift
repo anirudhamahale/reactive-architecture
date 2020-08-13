@@ -14,6 +14,7 @@ class SyncRepository {
     return Observable<String>.create { (observer) -> Disposable in
       DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
         observer.onNext("Your element of surprise.")
+        observer.onCompleted()
       })
       return Disposables.create()
     }
@@ -32,7 +33,8 @@ class SyncRepository {
   func names() -> Observable<[String]> {
      return .create { (observer) -> Disposable in
        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-        observer.onNext(["Jay", "Ho"])
+        observer.onNext(["Dil Bechara", "Chichore"])
+        observer.onCompleted()
        })
        return Disposables.create()
      }

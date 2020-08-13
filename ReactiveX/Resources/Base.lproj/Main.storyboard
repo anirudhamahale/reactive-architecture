@@ -17,13 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ThV-SO-jkT">
-                                <rect key="frame" x="20" y="108" width="374" height="30"/>
+                                <rect key="frame" x="20" y="108" width="374" height="68"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25Z-dm-lvf">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
                                         <state key="normal" title="Simple Alert example"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" id="YeL-AA-193"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSd-uC-wmf">
+                                        <rect key="frame" x="0.0" y="38" width="374" height="30"/>
+                                        <state key="normal" title="Table"/>
+                                        <connections>
+                                            <segue destination="YZP-3p-fo6" kind="show" id="7Kl-96-cVK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -71,6 +78,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="907" y="120"/>
+        </scene>
+        <!--Movies View Controller-->
+        <scene sceneID="fWN-vF-ZLH">
+            <objects>
+                <viewController id="YZP-3p-fo6" customClass="MoviesViewController" customModule="ReactiveX" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5pl-f4-qIy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="cwe-gU-rOL"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tSC-Rd-kUT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="non-M8-LYt"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshButton" destination="non-M8-LYt" id="PF3-mu-ePa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dHo-px-tiM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="815"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="XvW-TJ-34i">
